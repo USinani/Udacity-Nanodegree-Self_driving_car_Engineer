@@ -2,9 +2,6 @@
 
 ## Writeup Template
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
 
 **Finding Lane Lines on the Road**
 
@@ -12,44 +9,39 @@ The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
 * Reflect on your work in a written report
 
+In working for this project to testing the solution pipeline, the images used were the following:
 
-[//]: # (Image References)
-
+[CarND-LaneLines-P1/test_images/]: # (Image References)
+['solidWhiteRight.jpg',
+ 'solidWhiteCurve.jpg',
+ 'solidYellowCurve2.jpg',
+ 'solidYellowLeft.jpg',
+ 'whiteCarLaneSwitch.jpg',
+ 'solidYellowCurve.jpg']
+ 
 [image1]: ./examples/grayscale.jpg "Grayscale"
 
----
+
+
 
 ### Reflection
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the BGR colored images to grayscale, then I
-moved on to converting the color space to HSV.
-
-
-
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by using the linear approximation equation.
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
+My pipeline consisted of 5 steps. First, I converted the RGB images to grayscale. To reducing the noise right upfront of the pipeline, Gaussian blur was performed followed by canny edge detector to detect the edges in the image. Next, a triangular region of interest was defined in order to confine the detection algorithm thus, avoiding detecting other objects/noises. Having, entailed the area of interest through coding, next lines were detected followed by Hough transform to make the correct approximation of the correct and most line(s). Finally draw lines and weighted line were used in order to show the results in the image and/videos.  
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
+Potential shortcomings
 
-One potential shortcoming would be what would happen when ...
+-Strongly curved lane lines
+-Variations of brighness and light conditions can affect detection of lines.
+-Shadows casted by the presence of other objects nearby the road 
 
--light intensity changes
--area of interest is not clear enough to detect the regions with hight color contrast
--Noises present in the image
-
-Another shortcoming could be.
--camera lens distortion
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to use better image filters
+Tweaking further Canny edge detector could better improve the accuracy of detection the edges resulting in better line detection. Futhermore, reducing image noises through filtering could be another solution to improve the detection pipeline.
 
-Another potential improvement could be to better correct for distortion
